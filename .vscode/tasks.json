@@ -1,0 +1,40 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "CMake: Configure (Debug)",
+      "type": "shell",
+      "command": "${workspaceFolder}/configure.bat",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "CMake: Build (Debug)",
+      "type": "shell",
+      "command": "${workspaceFolder}/build_debug.bat",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": {
+        "owner": "cpp",
+        "fileLocation": ["absolute"],
+        "pattern": {
+          "regexp": "^(.*)\\((\\d+)\\):\\s+(error|warning)\\s+(.*)$",
+          "file": 1,
+          "line": 2,
+          "severity": 3,
+          "message": 4
+        }
+      }
+    }
+  ]
+}

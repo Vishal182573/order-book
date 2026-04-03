@@ -1,0 +1,118 @@
+**********************************************************************
+** Visual Studio 2026 Developer Command Prompt v18.0.2
+** Copyright (c) 2025 Microsoft Corporation
+**********************************************************************
+[DEBUG:ext\vcvars.bat] Found potential v145 version file: 'Microsoft.VCToolsVersion.VC.14.50.18.0.txt'
+[DEBUG:ext\vcvars.bat] Testing v145 version file: 'Microsoft.VCToolsVersion.VC.14.50.18.0.txt'
+[1/2] Building CXX object src\CMakeFiles\order_book_engine.dir\main.cpp.obj
+FAILED: src/CMakeFiles/order_book_engine.dir/main.cpp.obj 
+C:\PROGRA~2\MICROS~2\18\BUILDT~1\VC\Tools\MSVC\1450~1.357\bin\Hostx64\x64\cl.exe  /nologo /TP  -IC:\Users\sharm\Documents\quant\order-book\src /W4 /EHsc /Od /Zi /RTC1 -std:c++20 -MDd /showIncludes /Fosrc\CMakeFiles\order_book_engine.dir\main.cpp.obj /Fdsrc\CMakeFiles\order_book_engine.dir\ /FS -c C:\Users\sharm\Documents\quant\order-book\src\main.cpp
+C:\Users\sharm\Documents\quant\order-book\src\core\order.hpp(61): warning C4324: 'obk::Order': structure was padded due to alignment specifier
+C:\Users\sharm\Documents\quant\order-book\src\core\lock_free_queue.hpp(64): warning C4324: 'obk::SPSCQueue<obk::Event,65536>': structure was padded due to alignment specifier
+C:\Users\sharm\Documents\quant\order-book\src\core\lock_free_queue.hpp(64): note: the template instantiation context (the oldest one first) is
+C:\Users\sharm\Documents\quant\order-book\src\core/event_bus.hpp(61): note: see reference to class template instantiation 'obk::SPSCQueue<obk::Event,65536>' being compiled
+C:\Users\sharm\Documents\quant\order-book\src\engine\../book/order_book.hpp(199): error C2665: 'std::_Tree<std::_Tmap_traits<_Kty,_Ty,_Pr,_Alloc,false>>::erase': no overloaded function could convert all the argument types
+        with
+        [
+            _Kty=obk::Price,
+            _Ty=obk::PriceLevelQueue,
+            _Pr=std::less<obk::Price>,
+            _Alloc=std::allocator<std::pair<const obk::Price,obk::PriceLevelQueue>>
+        ]
+C:\Program Files (x86)\Microsoft Visual Studio\18\BuildTools\VC\Tools\MSVC\14.50.35717\include\xtree(1368): note: could be 'unsigned __int64 std::_Tree<std::_Tmap_traits<_Kty,_Ty,_Pr,_Alloc,false>>::erase(const __int64 &) noexcept(<expr>)'
+        with
+        [
+            _Kty=obk::Price,
+            _Ty=obk::PriceLevelQueue,
+            _Pr=std::less<obk::Price>,
+            _Alloc=std::allocator<std::pair<const obk::Price,obk::PriceLevelQueue>>
+        ]
+C:\Users\sharm\Documents\quant\order-book\src\engine\../book/order_book.hpp(199): note: 'unsigned __int64 std::_Tree<std::_Tmap_traits<_Kty,_Ty,_Pr,_Alloc,false>>::erase(const __int64 &) noexcept(<expr>)': cannot convert argument 1 from '_T1' to 'const __int64 &'
+        with
+        [
+            _Kty=obk::Price,
+            _Ty=obk::PriceLevelQueue,
+            _Pr=std::less<obk::Price>,
+            _Alloc=std::allocator<std::pair<const obk::Price,obk::PriceLevelQueue>>
+        ]
+        and
+        [
+            _T1=std::reverse_iterator<std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<const obk::Price,obk::PriceLevelQueue>>>>>
+        ]
+C:\Users\sharm\Documents\quant\order-book\src\engine\../book/order_book.hpp(199): note: Reason: cannot convert from '_T1' to 'const __int64'
+        with
+        [
+            _T1=std::reverse_iterator<std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<const obk::Price,obk::PriceLevelQueue>>>>>
+        ]
+C:\Users\sharm\Documents\quant\order-book\src\engine\../book/order_book.hpp(199): note: No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+C:\Program Files (x86)\Microsoft Visual Studio\18\BuildTools\VC\Tools\MSVC\14.50.35717\include\xtree(1355): note: or       'std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<const obk::Price,obk::PriceLevelQueue>>>> std::_Tree<std::_Tmap_traits<_Kty,_Ty,_Pr,_Alloc,false>>::erase(std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<const obk::Price,obk::PriceLevelQueue>>>>) noexcept'
+        with
+        [
+            _Kty=obk::Price,
+            _Ty=obk::PriceLevelQueue,
+            _Pr=std::less<obk::Price>,
+            _Alloc=std::allocator<std::pair<const obk::Price,obk::PriceLevelQueue>>
+        ]
+C:\Users\sharm\Documents\quant\order-book\src\engine\../book/order_book.hpp(199): note: 'std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<const obk::Price,obk::PriceLevelQueue>>>> std::_Tree<std::_Tmap_traits<_Kty,_Ty,_Pr,_Alloc,false>>::erase(std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<const obk::Price,obk::PriceLevelQueue>>>>) noexcept': cannot convert argument 1 from '_T1' to 'std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<const obk::Price,obk::PriceLevelQueue>>>>'
+        with
+        [
+            _Kty=obk::Price,
+            _Ty=obk::PriceLevelQueue,
+            _Pr=std::less<obk::Price>,
+            _Alloc=std::allocator<std::pair<const obk::Price,obk::PriceLevelQueue>>
+        ]
+        and
+        [
+            _T1=std::reverse_iterator<std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<const obk::Price,obk::PriceLevelQueue>>>>>
+        ]
+C:\Users\sharm\Documents\quant\order-book\src\engine\../book/order_book.hpp(199): note: No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+C:\Program Files (x86)\Microsoft Visual Studio\18\BuildTools\VC\Tools\MSVC\14.50.35717\include\xtree(1346): note: or       'std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<const obk::Price,obk::PriceLevelQueue>>>> std::_Tree<std::_Tmap_traits<_Kty,_Ty,_Pr,_Alloc,false>>::erase(std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<const obk::Price,obk::PriceLevelQueue>>>>) noexcept'
+        with
+        [
+            _Kty=obk::Price,
+            _Ty=obk::PriceLevelQueue,
+            _Pr=std::less<obk::Price>,
+            _Alloc=std::allocator<std::pair<const obk::Price,obk::PriceLevelQueue>>
+        ]
+C:\Users\sharm\Documents\quant\order-book\src\engine\../book/order_book.hpp(199): note: 'initializing': cannot convert from '_T1' to 'std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<const obk::Price,obk::PriceLevelQueue>>>>'
+        with
+        [
+            _T1=std::reverse_iterator<std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<const obk::Price,obk::PriceLevelQueue>>>>>
+        ]
+C:\Users\sharm\Documents\quant\order-book\src\engine\../book/order_book.hpp(199): note: No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+C:\Users\sharm\Documents\quant\order-book\src\engine\../book/order_book.hpp(199): note: while trying to match the argument list '(_T1)'
+        with
+        [
+            _T1=std::reverse_iterator<std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<const obk::Price,obk::PriceLevelQueue>>>>>
+        ]
+C:\Users\sharm\Documents\quant\order-book\src\engine\../book/order_book.hpp(199): note: the template instantiation context (the oldest one first) is
+C:\Users\sharm\Documents\quant\order-book\src\engine\../book/order_book.hpp(209): note: see reference to function template instantiation 'auto obk::OrderBook::match_against_book::<lambda_1>::operator ()<std::reverse_iterator<std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<const obk::Price,obk::PriceLevelQueue>>>>>,std::reverse_iterator<std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<const obk::Price,obk::PriceLevelQueue>>>>>>(_T1,_T2) const' being compiled
+        with
+        [
+            _T1=std::reverse_iterator<std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<const obk::Price,obk::PriceLevelQueue>>>>>,
+            _T2=std::reverse_iterator<std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<const obk::Price,obk::PriceLevelQueue>>>>>
+        ]
+C:\Users\sharm\Documents\quant\order-book\src\core\lock_free_queue.hpp(64): warning C4324: 'obk::SPSCQueue<obk::OrderCommand,65536>': structure was padded due to alignment specifier
+C:\Users\sharm\Documents\quant\order-book\src\core\lock_free_queue.hpp(64): note: the template instantiation context (the oldest one first) is
+C:\Users\sharm\Documents\quant\order-book\src\engine/matching_engine.hpp(190): note: see reference to class template instantiation 'obk::SPSCQueue<obk::OrderCommand,65536>' being compiled
+C:\Users\sharm\Documents\quant\order-book\src\core\lock_free_queue.hpp(65): warning C4324: 'obk::SPSCQueue<obk::OrderCommand,65536>': structure was padded due to alignment specifier
+C:\Users\sharm\Documents\quant\order-book\src\engine\../core/object_pool.hpp(67): warning C4324: 'obk::ObjectPool<obk::Order,1048576>': structure was padded due to alignment specifier
+C:\Users\sharm\Documents\quant\order-book\src\engine\../core/object_pool.hpp(67): note: the template instantiation context (the oldest one first) is
+C:\Users\sharm\Documents\quant\order-book\src\engine/matching_engine.hpp(313): note: see reference to class template instantiation 'obk::ObjectPool<obk::Order,1048576>' being compiled
+C:\Users\sharm\Documents\quant\order-book\src\main.cpp(36): warning C4834: discarding return value of function with [[nodiscard]] attribute
+C:\Users\sharm\Documents\quant\order-book\src\main.cpp(40): warning C4834: discarding return value of function with [[nodiscard]] attribute
+C:\Users\sharm\Documents\quant\order-book\src\main.cpp(47): warning C4834: discarding return value of function with [[nodiscard]] attribute
+C:\Users\sharm\Documents\quant\order-book\src\main.cpp(115): warning C4834: discarding return value of function with [[nodiscard]] attribute
+C:\Users\sharm\Documents\quant\order-book\src\main.cpp(120): warning C4834: discarding return value of function with [[nodiscard]] attribute
+C:\Users\sharm\Documents\quant\order-book\src\main.cpp(125): warning C4834: discarding return value of function with [[nodiscard]] attribute
+C:\Users\sharm\Documents\quant\order-book\src\main.cpp(130): warning C4834: discarding return value of function with [[nodiscard]] attribute
+C:\Users\sharm\Documents\quant\order-book\src\main.cpp(135): warning C4834: discarding return value of function with [[nodiscard]] attribute
+C:\Users\sharm\Documents\quant\order-book\src\main.cpp(145): warning C4834: discarding return value of function with [[nodiscard]] attribute
+C:\Users\sharm\Documents\quant\order-book\src\main.cpp(202): warning C4834: discarding return value of function with [[nodiscard]] attribute
+C:\Users\sharm\Documents\quant\order-book\src\main.cpp(75): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\sharm\Documents\quant\order-book\src\main.cpp(76): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\sharm\Documents\quant\order-book\src\main.cpp(77): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\sharm\Documents\quant\order-book\src\main.cpp(86): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\sharm\Documents\quant\order-book\src\main.cpp(87): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\sharm\Documents\quant\order-book\src\main.cpp(88): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+ninja: build stopped: subcommand failed.
