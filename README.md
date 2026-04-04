@@ -4,6 +4,37 @@ A production-grade, lock-free, multi-symbol order matching engine targeting **su
 
 ## Architecture
 
+**Overview & Purpose**
+This project serves as a replication of exchange order matching. Once a trading strategy generates signals and is evaluated, orders are routed to this internal Order Book Engine. It checks for slippage and simulates real-world execution matching. Once trades are matched internally, the Trade Engine emits them via the event bus to the Execution Engine, which then forwards them to the actual Exchange.
+
+### Full System Pipeline
+```text
+Market Data Collector
+        ↓
+Redis Streams
+        ↓
+Time Series Warehouse
+        ↓
+Feature Generation Engine
+        ↓
+Strategy Engine
+        ↓
+Risk Engine
+        ↓
+Order Manager
+        ↓
+Order Book (C++)
+        ↓
+Trade Engine
+        ↓
+Portfolio Engine
+        ↓
+Execution Engine
+        ↓
+Exchange
+```
+
+### Core Engine Architecture
 ```
 ┌──────────────────────────────────────────────────────────────────┐
 │                       Strategy Engine                            │
