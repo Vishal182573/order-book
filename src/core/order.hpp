@@ -5,7 +5,7 @@
 
 namespace obk {
 
-// ─── Order ────────────────────────────────────────────────────────────────────
+// ─── Order ---------------------------------------------------------------
 // Kept POD-like and cache-line friendly (64 bytes target for hot fields)
 struct alignas(64) Order {
     // ── Identity (hot) ─────────────────────────────────────────────────────
@@ -34,7 +34,15 @@ struct alignas(64) Order {
     Price       trigger_price;  // for stop/tp orders
     bool        triggered;
 
-    // ── Iceberg ──────────────────────────────────────────────────────────
+    // ── Iceberg ---------------------------------------------------------
+    /* Iceberg orders are special orders that are not fully visible in the order book.
+     They are used to hide the true size of the order. because true size of order may be very large also market should not react to large orders.
+     So we only show a part of the order in the order book.
+     For example :- if order size is 100000 and display size is 1000 then only 1000 quantity will be visible in the order book.
+     when 1000 quantity is filled then next 1000 quantity will be visible in the order book.
+     and so on until the order is fully filled.
+     display_qty is the quantity that is visible in the order book.
+     ice_remaining is the quantity that is hidden in the order book.*/
     Quantity    display_qty;    // visible quantity (iceberg)
     Quantity    ice_remaining;  // hidden reserve
 

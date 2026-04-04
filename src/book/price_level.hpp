@@ -1,5 +1,5 @@
 #pragma once
-// ─── Price Level ──────────────────────────────────────────────────────────────
+// ─── Price Level -----------------------------------------------------------
 // A single price level in the order book.
 // Maintains a FIFO queue of orders at this price (price-time priority).
 // Uses an intrusive doubly-linked list for O(1) cancel/fill.

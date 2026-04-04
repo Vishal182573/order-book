@@ -1,5 +1,5 @@
 #pragma once
-// ─── Order Book (single symbol) ───────────────────────────────────────────────
+// ─── Order Book (single symbol) ---------------------------------------
 // Maintains bid and ask sides as sorted maps of PriceLevelQueues.
 // Bids: descending (best bid = highest price = rbegin of map)
 // Asks: ascending  (best ask = lowest price  = begin of map)
@@ -15,6 +15,13 @@
 
 namespace obk {
 
+// ─── Match Result ----------------------------------------------------------
+// Yeh struct batata hai ki jab koi order book mein aata hai, toh kya-kya hua.
+// Ismein yeh details hoti hain:
+// matched: kya koi trade hua? (true/false)
+// filled_qty: kitna quantity match hua?
+// avg_price: average price kya thi jis par trade hua?
+// trades: actual trades ki list (kya-kya trades hue)
 struct MatchResult {
     bool      matched = false;
     Quantity  filled_qty = 0;
@@ -22,25 +29,26 @@ struct MatchResult {
     std::vector<Trade> trades;
 };
 
+
 class OrderBook {
 public:
     explicit OrderBook(SymbolId symbol_id, Symbol sym)
         : symbol_id_(symbol_id), symbol_(sym) {}
 
-    // ── Order add ─────────────────────────────────────────────────────────
+    // ── Order add ----------------------------------------------------------
     [[nodiscard]] MatchResult add_limit_order(Order* order) noexcept;
     [[nodiscard]] MatchResult add_market_order(Order* order) noexcept;
     [[nodiscard]] MatchResult add_stop_order(Order* order) noexcept;
 
-    // ── Cancel / Modify ───────────────────────────────────────────────────
+    // ── Cancel / Modify ---------------------------------------------------   
     bool cancel_order(OrderId id) noexcept;
     bool modify_order(OrderId id, Price new_price, Quantity new_qty) noexcept;
 
-    // ── Stop order triggering ─────────────────────────────────────────────
+    // ── Stop order triggering ---------------------------------------------
     // Returns triggered orders when last trade price crosses their trigger
     std::vector<Order*> check_stop_triggers(Price last_trade_price) noexcept;
 
-    // ── Market data ───────────────────────────────────────────────────────
+    // ── Market data -------------------------------------------------------
     [[nodiscard]] std::optional<Price>    best_bid()    const noexcept;
     [[nodiscard]] std::optional<Price>    best_ask()    const noexcept;
     [[nodiscard]] std::optional<Price>    spread()      const noexcept;

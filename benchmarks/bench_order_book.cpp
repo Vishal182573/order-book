@@ -1,4 +1,7 @@
-// ─── Benchmarks: Order Book Engine ────────────────────────────────────────────
+// ─── Benchmarks: Order Book Engine -----------------------------------
+
+// Software development (especially High-Frequency Trading ya Quant systems) mein benchmark ka matlab hota hai apne code ki speed, efficiency aur performance ko maapna (measure karna). Isme hum aisa code likhte hain jo hamare main system ke components ko hazaaron ya laakhon baar run karta hai aur yeh check karta hai ki execution mein kitne nanoseconds ya microseconds lag rahe hain. Kyunki trading mein speed hi sab kuch hai, benchmarks ensure karte hain ki aapke system mein koi slow parts (bottlenecks) na ban rahein.
+// basically benchmark file is used to test the performance of the code like which specific portion of code leads to more time to execute
 #include <benchmark/benchmark.h>
 #include "../src/core/lock_free_queue.hpp"
 #include "../src/core/object_pool.hpp"
@@ -12,7 +15,8 @@ static Symbol make_sym() {
     std::strcpy(s.name, "BTC-USDT"); return s;
 }
 
-// ─── SPSC Queue throughput ────────────────────────────────────────────────────
+// ─── SPSC Queue throughput ----------------------------------------------------
+// SPSC stands for Single Producer Single Consumer, it is a type of lock(mutex) free queue which is used to  push and pop the data from the queue to check how much speed we can achieve without locks
 static void BM_SPSCQueue(benchmark::State& state) {
     SPSCQueue<int, 65536> q;
     for (auto _ : state) {
@@ -23,7 +27,10 @@ static void BM_SPSCQueue(benchmark::State& state) {
 }
 BENCHMARK(BM_SPSCQueue)->ThreadRange(1, 2);
 
-// ─── Object Pool allocate/release ─────────────────────────────────────────────
+// ─── Object Pool allocate/release -------------------------------------------
+// Object pool is a technique used to reduce the overhead of memory allocation and deallocation 
+// basically it is used to store the objects in a pool and reuse them when needed
+// Yeh benchmark check karta hai ki pool se naya Order object maangne (acquire) aur use wapas free karne (release) mein kitna negligible time lagta hai.
 static void BM_ObjectPool(benchmark::State& state) {
     ObjectPool<Order, 1024> pool;
     for (auto _ : state) {
@@ -35,7 +42,9 @@ static void BM_ObjectPool(benchmark::State& state) {
 }
 BENCHMARK(BM_ObjectPool);
 
-// ─── Limit order insert (no match) ───────────────────────────────────────────
+// ─── Limit order insert (no match) ---------------------------------------
+// Yeh benchmark check karta hai ki jab koi limit order book mein insert hota hai aur usse koi match nahi milta (yani woh sirf book mein add hota hai), toh usmein kitna time lagta hai.
+// how much time it takes to insert a limit order in the book when there is no match
 static void BM_LimitInsert(benchmark::State& state) {
     OrderBook book(1, make_sym());
     static Order orders[65536];
@@ -58,7 +67,8 @@ static void BM_LimitInsert(benchmark::State& state) {
 }
 BENCHMARK(BM_LimitInsert);
 
-// ─── Limit order match (crossing) ────────────────────────────────────────────
+// ─── Limit order match (crossing) ---------------------------------------------
+// Jab ek Buy order aur Sell order exactly match (cross) karte hain, toh process mein condition check hoti hain, quantity minus hoti hai aur trade complete hota hai. BM_LimitMatch is matching condition ki throughput track karta hai ki aisi matches kitni jaldi execute hoti hain.
 static void BM_LimitMatch(benchmark::State& state) {
     for (auto _ : state) {
         state.PauseTiming();
@@ -83,7 +93,8 @@ static void BM_LimitMatch(benchmark::State& state) {
 }
 BENCHMARK(BM_LimitMatch);
 
-// ─── Market order full sweep ──────────────────────────────────────────────────
+// ─── Market order full sweep ---------------------------------------------
+// basically jab ek iceberg(bht bada order) order book mein aata hai jo kaafi sare ask orders ko match karke clear(sweep) karta hai toh usko pura clear karne mein kitna time lagta hai uske lie ye benchmark hai
 static void BM_MarketOrderSweep(benchmark::State& state) {
     for (auto _ : state) {
         state.PauseTiming();
@@ -107,7 +118,8 @@ static void BM_MarketOrderSweep(benchmark::State& state) {
 }
 BENCHMARK(BM_MarketOrderSweep);
 
-// ─── Cancel order ─────────────────────────────────────────────────────────────
+// ─── Cancel order ----------------------------------------------------------
+// Yeh benchmark check karta hai ki jab koi order book se cancel hota hai, toh usmein kitna time lagta hai
 static void BM_CancelOrder(benchmark::State& state) {
     OrderBook book(1, make_sym());
     std::vector<Order> orders(state.range(0));
@@ -129,7 +141,8 @@ static void BM_CancelOrder(benchmark::State& state) {
 }
 BENCHMARK(BM_CancelOrder)->Arg(1000)->Arg(10000);
 
-// ─── Top-of-book snapshot ─────────────────────────────────────────────────────
+// ─── Top-of-book snapshot ---------------------------------------------
+// top of book basically best bid and best ask price and quantity hoti hai to ye benchmark check karta hai ki is snapshot ko lene mein kitna time lagta hai
 static void BM_TopOfBook(benchmark::State& state) {
     OrderBook book(1, make_sym());
     static Order b, a;

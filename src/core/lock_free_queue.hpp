@@ -13,6 +13,10 @@
 
 namespace obk {
 
+// ─── Cache Line ------------------------------------------------------------------
+// Cache line is a block of memory that is transferred between the CPU cache and main memory.
+// It is used to reduce the latency of memory access.
+// The size of a cache line is typically 64 bytes.
 #ifdef __cpp_lib_hardware_interference_size
     static constexpr size_t CACHE_LINE = std::hardware_destructive_interference_size;
 #else
