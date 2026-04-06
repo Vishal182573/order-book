@@ -9,29 +9,33 @@ This project serves as a replication of exchange order matching. Once a trading 
 
 ### Full System Pipeline
 ```text
-Market Data Collector
-        ↓
-Redis Streams
-        ↓
-Time Series Warehouse
-        ↓
-Feature Generation Engine
-        ↓
-Strategy Engine
-        ↓
-Risk Engine
-        ↓
-Order Manager
-        ↓
-Order Book (C++)
-        ↓
-Trade Engine
-        ↓
-Portfolio Engine
-        ↓
-Execution Engine
-        ↓
 Exchange
+  ↓
+Market Data Collector
+  ↓
+Redis Streams
+  ↓
+Time Series Warehouse
+  ↓
+Feature Engine
+  ↓
+Strategy Engine
+  ↓
+Risk Engine
+  ↓
+Order Manager
+  ↓
+Order Book (simulation layer)
+  ↓
+Execution Engine
+  ↓
+Exchange
+  ↓
+Trade Events
+  ↓
+Portfolio Engine
+  ↓
+Backtesting Engine (offline)
 ```
 
 ### Core Engine Architecture

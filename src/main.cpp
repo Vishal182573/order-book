@@ -4,29 +4,33 @@
 //   → Risk / Portfolio / Execution Engines
 // like this is the replication of the orders from the exchange only and not the full exchange. 
 // once the strategy is ready after evaluating the results we will move the order to this order book it checks the slipage and all other things which will happen in real world if we make the order in the exchange. after that we send the trade to the execution engine using the trade engine. we will send the trade to the execution engine using the event bus.
-/* Market Data Collector
-        ↓
+/* Exchange
+  ↓
+Market Data Collector
+  ↓
 Redis Streams
-        ↓
+  ↓
 Time Series Warehouse
-        ↓
-Feature Generation Engine
-        ↓
+  ↓
+Feature Engine
+  ↓
 Strategy Engine
-        ↓
+  ↓
 Risk Engine
-        ↓
+  ↓
 Order Manager
-        ↓
-Order Book (C++)
-        ↓
-Trade Engine
-        ↓
-Portfolio Engine
-        ↓
+  ↓
+Order Book (simulation layer)
+  ↓
 Execution Engine
-        ↓
-Exchange */
+  ↓
+Exchange
+  ↓
+Trade Events
+  ↓
+Portfolio Engine
+  ↓
+Backtesting Engine (offline) */
 
 #include "core/types.hpp"
 #include "core/event_bus.hpp"
